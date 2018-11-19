@@ -26,7 +26,7 @@ from ethereumetl.utils import hex_to_dec, to_normalized_address
 
 
 class EthTransactionMapper(object):
-    def json_dict_to_transaction(self, json_dict):
+    def json_dict_to_transaction(self, json_dict,timestamp):
         transaction = EthTransaction()
         transaction.hash = json_dict.get('hash')
         transaction.nonce = hex_to_dec(json_dict.get('nonce'))
@@ -39,9 +39,10 @@ class EthTransactionMapper(object):
         transaction.gas = hex_to_dec(json_dict.get('gas'))
         transaction.gas_price = hex_to_dec(json_dict.get('gasPrice'))
         transaction.input = json_dict.get('input')
+        transaction.timestamp = timestamp
         return transaction
 
-    def transaction_to_dict(self, transaction):
+    def transaction_to_dict(self, transaction,timestamp):
         return {
             'type': 'transaction',
             'hash': transaction.hash,
@@ -55,4 +56,5 @@ class EthTransactionMapper(object):
             'gas': transaction.gas,
             'gas_price': transaction.gas_price,
             'input': transaction.input,
+            'timestamp': timestamp,
         }

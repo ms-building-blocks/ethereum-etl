@@ -83,6 +83,7 @@ class ExportBlocksJob(BaseJob):
         if self.export_blocks:
             self.item_exporter.export_item(self.block_mapper.block_to_dict(block))
         if self.export_transactions:
+            timestamp = block.timestamp
             for tx in block.transactions:
                 self.item_exporter.export_item(self.transaction_mapper.transaction_to_dict(tx))
 
