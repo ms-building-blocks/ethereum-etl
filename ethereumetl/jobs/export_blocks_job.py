@@ -85,7 +85,7 @@ class ExportBlocksJob(BaseJob):
         if self.export_transactions:
             timestamp = block.timestamp
             for tx in block.transactions:
-                self.item_exporter.export_item(self.transaction_mapper.transaction_to_dict(tx))
+                self.item_exporter.export_item(self.transaction_mapper.transaction_to_dict(tx,timestamp))
 
     def _end(self):
         self.batch_work_executor.shutdown()
